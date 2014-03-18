@@ -1,4 +1,5 @@
 define postfix::conf (
+  $ensure = 'present',
   $value  = undef,
 ) {
   if ! defined(Class['postfix']) {
