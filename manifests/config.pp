@@ -35,6 +35,7 @@ class postfix::config {
   postfix::conf { 'mydestination':      value => $::postfix::mydestination }->
   postfix::conf { 'inet_interfaces':    value => $::postfix::inet_interfaces }->
   postfix::conf { 'inet_protocols':     value => $::postfix::inet_protocols }->
+  postfix::conf { 'proxy_interfaces':   value => $::postfix::proxy_interfaces }->
   postfix::conf { 'mynetworks_style':   value => $::postfix::mynetworks_style }->
   postfix::conf { 'mynetworks':         value => $::postfix::mynetworks }->
   postfix::conf { 'relay_domains':      value => $::postfix::relay_domains }->
@@ -45,5 +46,6 @@ class postfix::config {
   postfix::conf { 'html_directory':     value => $::postfix::params::html_directory }->
   postfix::conf { 'manpage_directory':  value => $::postfix::params::manpage_directory }->
   postfix::conf { 'sample_directory':   value => $::postfix::params::sample_directory }->
-  postfix::conf { 'readme_directory':   value => $::postfix::params::readme_directory }
+  postfix::conf { 'readme_directory':   value => $::postfix::params::readme_directory }->
+  postfix::conf { 'unknown_local_recipient_reject_code': value => '550' }
 }

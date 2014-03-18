@@ -9,6 +9,7 @@ class postfix (
   $mydestination                = '$myorigin',
   $inet_interfaces              = 'all',
   $inet_protocols               = 'ipv4',
+  $proxy_interfaces             = undef,
   $mynetworks_style             = 'host',
   $mynetworks                   = undef,
   $relay_domains                = undef,
