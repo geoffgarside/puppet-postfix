@@ -1,6 +1,6 @@
 class postfix::install {
   package { 'postfix':
-    ensure => $::postfix::ensure,
+    ensure => $::postfix::package_version,
     name   => $::postfix::package_name,
   }
 }
