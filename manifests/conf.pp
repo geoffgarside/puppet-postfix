@@ -11,20 +11,34 @@ define postfix::conf (
     require => File[$::postfix::main_cf],
   }
 
-  case $value {
-    undef: {
+  case $ensure {
+    'absent': {
       augeas { "postfix/main.cf: '${name}' removed":
         changes => "rm ${name}",
       }
     }
-    '': {
+    'blank': {
       augeas { "postfix/main.cf: '${name}' blank ":
         changes => "clear ${name}",
       }
     }
     default: {
-      augeas { "postfix/main.cf: '${name}' = '${value}'":
-        changes => "set ${name} '${value}'",
+      case $value {
+        undef: {
+          augeas { "postfix/main.cf: '${name}' removed":
+            changes => "rm ${name}",
+          }
+        }
+        '': {
+          augeas { "postfix/main.cf: '${name}' blank ":
+            changes => "clear ${name}",
+          }
+        }
+        default: {
+          augeas { "postfix/main.cf: '${name}' = '${value}'":
+            changes => "set ${name} '${value}'",
+          }
+        }
       }
     }
   }
