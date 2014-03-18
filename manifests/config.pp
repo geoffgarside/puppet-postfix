@@ -29,6 +29,7 @@ class postfix::config {
   postfix::conf { 'command_directory':  value => $::postfix::params::command_directory }->
   postfix::conf { 'daemon_directory':   value => $::postfix::params::daemon_directory }->
   postfix::conf { 'mail_owner':         value => $::postfix::params::postfix_user }->
+  postfix::conf { 'myhostname':         value => $::postfix::myhostname }->
   postfix::conf { 'myorigin':           value => $::postfix::myorigin }->
   postfix::conf { 'mydestination':      value => $::postfix::mydestination }->
   postfix::conf { 'inet_interfaces':    value => $::postfix::inet_interfaces }->
