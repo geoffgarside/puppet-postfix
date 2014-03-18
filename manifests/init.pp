@@ -4,6 +4,7 @@ class postfix (
   $package_name                 = $::postfix::params::package_name,
   $confdir                      = $::postfix::params::confdir,
   $main_cf_source               = undef,
+  $soft_bounce                  = 'no',
   $myorigin                     = $::fqdn,
   $mydestination                = '$myorigin',
   $inet_interfaces              = 'all',
@@ -11,6 +12,7 @@ class postfix (
   $mynetworks_style             = 'host',
   $mynetworks                   = undef,
   $relay_domains                = undef,
+  $smtpd_banner                 = $::postfix::params::smtpd_banner,
 ) inherits postfix::params {
 
   $main_cf   = "${confdir}/main.cf"
