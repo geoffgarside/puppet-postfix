@@ -1,0 +1,163 @@
+# File Managed by Puppet
+# SOFT BOUNCE
+#
+# The soft_bounce parameter provides a limited safety net for
+# testing.  When soft_bounce is enabled, mail will remain queued that
+# would otherwise bounce. This parameter disables locally-generated
+# bounces, and prevents the SMTP server from rejecting mail permanently
+# (by changing 5xx replies into 4xx replies). However, soft_bounce
+# is no cure for address rewriting mistakes or mail routing mistakes.
+#
+#soft_bounce = no
+
+# LOCAL PATHNAME INFORMATION
+data_directory = /var/db/postfix
+queue_directory = /var/spool/postfix
+command_directory = /usr/local/sbin
+daemon_directory = /usr/local/libexec/postfix
+
+# QUEUE AND PROCESS OWNERSHIP
+mail_owner = postfix
+#default_privs = nobody
+
+# INTERNET HOST AND DOMAIN NAMES
+#myhostname = host.domain.tld
+#mydomain = domain.tld
+#myorigin = $myhostname
+
+# RECEIVING MAIL
+#inet_interfaces = all
+#inet_interfaces = $myhostname
+#inet_interfaces = $myhostname, localhost
+#inet_interfaces = loopback-only
+inet_protocols = ipv4
+#proxy_interfaces = 1.2.3.4
+mydestination = $myhostname, localhost.$mydomain, localhost
+
+# REJECTING MAIL FOR UNKNOWN LOCAL USERS
+#local_recipient_maps = proxy:unix:passwd.byname $alias_maps
+unknown_local_recipient_reject_code = 550
+
+# TRUST AND RELAY CONTROL
+mynetworks_style = host
+#mynetworks = 168.100.189.0/28, 127.0.0.0/8
+#mynetworks = $config_directory/mynetworks
+#mynetworks = hash:$config_directory/network_table
+#relay_domains = $mydestination
+
+# INPUT RATE CONTROL
+# Specify 0 to disable the feature. Valid delays are 0..10.
+#in_flow_delay = 1s
+
+# ADDRESS REWRITING
+#
+# The ADDRESS_REWRITING_README document gives information about
+# address masquerading or other forms of address rewriting including
+# username->Firstname.Lastname mapping.
+
+# ADDRESS REDIRECTION (VIRTUAL DOMAIN)
+#
+# The VIRTUAL_README document gives information about the many forms
+# of domain hosting that Postfix supports.
+virtual_mailbox_maps = hash:$config_directory/virtual
+
+# "USER HAS MOVED" BOUNCE MESSAGES
+#
+# See the discussion in the ADDRESS_REWRITING_README document.
+
+# TRANSPORT MAP
+#
+# See the discussion in the ADDRESS_REWRITING_README document.
+transport_maps = hash:$config_directory/transport
+
+# ALIAS DATABASE
+#alias_maps = hash:/etc/aliases
+#alias_database = hash:/etc/aliases
+
+# ADDRESS EXTENSIONS (e.g., user+foo)
+#recipient_delimiter = +
+
+# DELIVERY TO MAILBOX
+#home_mailbox = Mailbox
+#home_mailbox = Maildir/
+mail_spool_directory = /var/mail
+
+# JUNK MAIL CONTROLS
+#
+# The controls listed here are only a very small subset. The file
+# SMTPD_ACCESS_README provides an overview.
+
+# The header_checks parameter specifies an optional table with patterns
+# that each logical message header is matched against, including
+# headers that span multiple physical lines.
+#
+# By default, these patterns also apply to MIME headers and to the
+# headers of attached messages. With older Postfix versions, MIME and
+# attached message headers were treated as body text.
+#
+# For details, see "man header_checks".
+#
+#header_checks = regexp:$config_directory/header_checks
+
+# FAST ETRN SERVICE
+#fast_flush_domains = $relay_domains
+
+# SHOW SOFTWARE VERSION OR NOT
+smtpd_banner = $myhostname ESMTP $mail_name
+
+# PARALLEL DELIVERY TO THE SAME DESTINATION
+#local_destination_concurrency_limit = 2
+#default_destination_concurrency_limit = 20
+
+# DEBUGGING CONTROL
+debug_peer_level = 2
+#debug_peer_list = 127.0.0.1
+#debug_peer_list = some.domain
+
+# The debugger_command specifies the external command that is executed
+# when a Postfix daemon program is run with the -D option.
+#
+# Use "command .. & sleep 5" so that the debugger can attach before
+# the process marches on. If you use an X-based debugger, be sure to
+# set up your XAUTHORITY environment variable before starting Postfix.
+#
+debugger_command =
+	 PATH=/bin:/usr/bin:/usr/local/bin:/usr/X11R6/bin
+	 ddd $daemon_directory/$process_name $process_id & sleep 5
+
+# If you can't use X, use this to capture the call stack when a
+# daemon crashes. The result is in a file in the configuration
+# directory, and is named after the process name and the process ID.
+#
+# debugger_command =
+#	PATH=/bin:/usr/bin:/usr/local/bin; export PATH; (echo cont;
+#	echo where) | gdb $daemon_directory/$process_name $process_id 2>&1
+#	>$config_directory/$process_name.$process_id.log & sleep 5
+#
+# Another possibility is to run gdb under a detached screen session.
+# To attach to the screen sesssion, su root and run "screen -r
+# <id_string>" where <id_string> uniquely matches one of the detached
+# sessions (from "screen -list").
+#
+# debugger_command =
+#	PATH=/bin:/usr/bin:/sbin:/usr/sbin; export PATH; screen
+#	-dmS $process_name gdb $daemon_directory/$process_name
+#	$process_id & sleep 1
+
+# INSTALL-TIME CONFIGURATION INFORMATION
+#
+# The following parameters are used when installing a new Postfix version.
+mailq_path = /usr/local/bin/mailq
+sendmail_path = /usr/local/sbin/sendmail
+newaliases_path = /usr/local/bin/newaliases
+
+# setgid_group: The group for mail submission and queue management
+# commands.  This must be a group name with a numerical group ID that
+# is not shared with other accounts, not even with the Postfix account.
+#
+setgid_group = maildrop
+
+html_directory = /usr/local/share/doc/postfix
+manpage_directory = /usr/local/man
+sample_directory = /usr/local/etc/postfix
+readme_directory = /usr/local/share/doc/postfix
