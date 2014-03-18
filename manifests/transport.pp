@@ -18,7 +18,7 @@ define postfix::transport (
   if ! defined(Postfix::Conf['transport_maps']) {
     postfix::conf { 'transport_maps':
       ensure  => $ensure,
-      value   => $file,
+      value   => "hash:${file}",
     }
   }
 
