@@ -5,10 +5,8 @@ class postfix::config {
     default  => 'file',
   }
 
-  $confdir    = $::postfix::confdir
-  $main_cf    = $::postfix::main_cf
-  $master_cf  = $::postfix::master_cf
-
+  $main_cf        = $::postfix::main_cf
+  $master_cf      = $::postfix::master_cf
   $main_cf_source = pick($::postfix::main_cf_source,
                     'puppet:///modules/postfix/main.cf')
 
