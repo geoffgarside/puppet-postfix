@@ -1,7 +1,7 @@
 class postfix::params {
   $package_name = 'postfix'
 
-  $confdir = $::osfamily ? {
+  $config_directory = $::osfamily ? {
     'FreeBSD' => '/usr/local/etc/postfix',
     default   => '/etc/postfix',
   }

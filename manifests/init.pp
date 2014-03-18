@@ -2,7 +2,7 @@ class postfix (
   $ensure                       = 'present',
   $package_version              = 'present',
   $package_name                 = $::postfix::params::package_name,
-  $confdir                      = $::postfix::params::confdir,
+  $config_directory             = $::postfix::params::config_directory,
   $main_cf_source               = undef,
   $soft_bounce                  = 'no',
   $myorigin                     = $::fqdn,
@@ -16,9 +16,9 @@ class postfix (
   $smtpd_banner                 = $::postfix::params::smtpd_banner,
 ) inherits postfix::params {
 
-  $main_cf   = "${confdir}/main.cf"
-  $master_cf = "${confdir}/master.cf"
-  $transport = "${confdir}/transport"
+  $main_cf   = "${config_directory}/main.cf"
+  $master_cf = "${config_directory}/master.cf"
+  $transport = "${config_directory}/transport"
 
   class { '::postfix::install': }->
   class { '::postfix::config': }->
