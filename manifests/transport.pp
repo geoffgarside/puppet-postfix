@@ -51,7 +51,6 @@ define postfix::transport (
     incl    => $_file,
     lens    => 'Postfix_Transport.lns',
     changes => $changes,
-    require => Postfix::Hash[$file],
     notify  => Postfix::Hash[$file],
   }
 }
