@@ -25,4 +25,7 @@ class postfix (
   class { '::postfix::config': }->
   class { '::postfix::service': }->
   Class['postfix']
+
+  Postfix::Conf <| |> ~> Class['postfix::service']
+  Class['postfix'] -> Postfix::Hash <| |>
 }
