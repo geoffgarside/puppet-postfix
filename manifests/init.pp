@@ -15,6 +15,15 @@ class postfix (
   $mynetworks                   = undef,
   $relay_domains                = undef,
   $smtpd_banner                 = $::postfix::params::smtpd_banner,
+  $disable_vrfy_command         = 'yes',
+  $smtpd_helo_required          = 'yes',
+  $smtpd_client_restrictions    = undef,
+  $smtpd_helo_restrictions      = undef,
+  $smtpd_sender_restrictions    = undef,
+  $smtpd_recipient_restrictions = undef,
+  $smtpd_error_sleep_time       = '1s',
+  $smtpd_soft_error_limit       = '10',
+  $smtpd_hard_error_limit       = '20',
 ) inherits postfix::params {
 
   $main_cf   = "${config_directory}/main.cf"

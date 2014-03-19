@@ -46,5 +46,18 @@ class postfix::config {
   postfix::conf { 'manpage_directory':  value => $::postfix::params::manpage_directory }->
   postfix::conf { 'sample_directory':   value => $::postfix::params::sample_directory }->
   postfix::conf { 'readme_directory':   value => $::postfix::params::readme_directory }->
-  postfix::conf { 'unknown_local_recipient_reject_code': value => '550' }
+  postfix::conf { 'unknown_local_recipient_reject_code': value => '550' }->
+  
+  # Junk mail controls
+  postfix::conf { 'disable_vrfy_command':   value => $::postfix::disable_vrfy_command }->
+  postfix::conf { 'smtpd_helo_required':    value => $::postfix::smtpd_helo_required }->
+  postfix::conf { 'smtpd_error_sleep_time': value => $::postfix::smtpd_error_sleep_time }->
+  postfix::conf { 'smtpd_soft_error_limit': value => $::postfix::smtpd_soft_error_limit }->
+  postfix::conf { 'smtpd_hard_error_limit': value => $::postfix::smtpd_hard_error_limit }->
+
+  postfix::conf { 'smtpd_client_restrictions':    value => join(any2array($::postfix::smtpd_client_restrictions), ', ') }->
+  postfix::conf { 'smtpd_helo_restrictions':      value => join(any2array($::postfix::smtpd_helo_restrictions), ', ') }->
+  postfix::conf { 'smtpd_sender_restrictions':    value => join(any2array($::postfix::smtpd_sender_restrictions), ', ') }->
+  postfix::conf { 'smtpd_recipient_restrictions': value => join(any2array($::postfix::smtpd_recipient_restrictions), ', ') }
+  
 }
