@@ -23,5 +23,6 @@ class postfix (
 
   class { '::postfix::install': }->
   class { '::postfix::config': }->
+  class { '::postfix::service': }->
   Class['postfix']
 }
