@@ -40,6 +40,9 @@ class postfix (
   $append_dot_domain               = $::postfix::params::append_dot_domain,
   $mailbox_size_limit              = $::postfix::params::mailbox_size_limit,
   $message_size_limit              = $::postfix::params::message_size_limit,
+  $smtp_outbound_ipv4              = $::postfix::params::smtp_outbound_ipv4,
+  $smtp_outbound_ipv6              = $::postfix::params::smtp_outbound_ipv6,
+  $smtp_outbound_helo              = $::postfix::params::smtp_outbound_helo,
 ) inherits postfix::params {
 
   $main_cf   = "${config_directory}/main.cf"

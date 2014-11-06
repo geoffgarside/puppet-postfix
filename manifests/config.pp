@@ -21,6 +21,24 @@ class postfix::config {
     ],
   }
 
+  if $::postfix::smtp_outbound_ipv4 and has_ip_address($::postfix::smtp_outbound_ipv4) {
+    $smtp_outbound_ipv4 = $::postfix::smtp_outbound_ipv4
+  }
+
+  if $::postfix::smtp_outbound_ipv6 and has_ip_address($::postfix::smtp_outbound_ipv6) {
+    $smtp_outbound_ipv6 = $::postfix::smtp_outbound_ipv6
+  }
+
+  $smtp_outbound_helo = $::postfix::smtp_outbound_helo
+
+  file { $master_cf:
+    ensure  => $file_ensure,
+    owner   => 'root',
+    group   => '0',
+    mode    => '0644',
+    content => template('postfix/master.cf.erb'),
+  }
+
   $mynetworks_array = delete_undef_values(any2array($::postfix::mynetworks))
   if ! empty($mynetworks_array) {
     $mynetworks = join($mynetworks_array, ', ')

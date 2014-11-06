@@ -46,6 +46,11 @@ class postfix::params {
   $append_dot_domain               = false
   $mailbox_size_limit              = 0
   $message_size_limit              = 10240000 # 10mb
+
+  $smtp_outbound_ipv4              = undef
+  $smtp_outbound_ipv6              = undef
+  $smtp_outbound_helo              = undef
+
   case $::osfamily {
     FreeBSD: {
       $service_restart    = '/usr/sbin/service postfix reload'
