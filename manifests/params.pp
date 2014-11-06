@@ -24,7 +24,7 @@ class postfix::params {
 
   case $::osfamily {
     FreeBSD: {
-      $service_restart    = '/usr/sbin/service postfix reload'
+      $service_reload     = '/usr/sbin/service postfix reload'
       $data_directory     = '/var/db/postfix'
       $queue_directory    = '/var/spool/postfix'
       $command_directory  = '/usr/local/sbin'
@@ -38,7 +38,7 @@ class postfix::params {
       $readme_directory   = '/usr/local/share/doc/postfix'
     }
     default: {
-      $service_restart    = '/etc/init.d/postfix reload'
+      $service_reload     = '/etc/init.d/postfix reload'
       $data_directory     = '/var/lib/postfix'
       $queue_directory    = '/var/spool/postfix'
       $command_directory  = '/usr/sbin'

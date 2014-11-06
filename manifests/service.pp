@@ -25,9 +25,13 @@ class postfix::service {
   }
 
   service { 'postfix':
-    ensure    => $service_ensure,
-    enable    => $service_enable,
-    hasstatus => true,
-    restart   => $::postfix::params::service_restart,
+    ensure     => $service_ensure,
+    enable     => $service_enable,
+    hasstatus  => true,
+    hasrestart => true,
+  }
+
+  exec { $::postfix::params::service_reload:
+    refreshonly => true,
   }
 }

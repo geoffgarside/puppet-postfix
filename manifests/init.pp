@@ -29,7 +29,11 @@ class postfix (
   class { '::postfix::config': }->
   class { '::postfix::service': }->
   Class['postfix']
+  
+  # Changes in config class restart postfix
+  Class['::postfix::config'] ~> Class['postfix::service']
 
-  Postfix::Conf <| |> ~> Class['postfix::service']
+  # Changes in postfix::conf reload postfix
+  Postfix::Conf <| |> ~> Exec['postfix::reload']
   Class['postfix'] -> Postfix::Hash <| |>
 }
