@@ -9,6 +9,16 @@ class postfix::config {
   $master_cf      = $::postfix::master_cf
   $main_cf_source = $::postfix::main_cf_source
 
+  if $::postfix::smtp_outbound_ipv4 and has_ip_address($::postfix::smtp_outbound_ipv4) {
+    $smtp_outbound_ipv4 = $::postfix::smtp_outbound_ipv4
+  }
+
+  if $::postfix::smtp_outbound_ipv6 and has_ip_address($::postfix::smtp_outbound_ipv6) {
+    $smtp_outbound_ipv6 = $::postfix::smtp_outbound_ipv6
+  }
+
+  $smtp_outbound_helo = $::postfix::smtp_outbound_helo
+
   file { $main_cf:
     ensure  => $file_ensure,
     owner   => 'root',
@@ -20,16 +30,6 @@ class postfix::config {
       $main_cf_source
     ],
   }
-
-  if $::postfix::smtp_outbound_ipv4 and has_ip_address($::postfix::smtp_outbound_ipv4) {
-    $smtp_outbound_ipv4 = $::postfix::smtp_outbound_ipv4
-  }
-
-  if $::postfix::smtp_outbound_ipv6 and has_ip_address($::postfix::smtp_outbound_ipv6) {
-    $smtp_outbound_ipv6 = $::postfix::smtp_outbound_ipv6
-  }
-
-  $smtp_outbound_helo = $::postfix::smtp_outbound_helo
 
   file { $master_cf:
     ensure  => $file_ensure,
