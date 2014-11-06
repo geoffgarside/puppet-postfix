@@ -67,6 +67,8 @@ class postfix::params {
       $smtpd_tls_CAfile   = '/usr/local/share/certs/ca-root-nss.crt'
 
       $tls_random_source  = 'dev:/dev/urandom'
+
+      $additional_packages = ['ca-root-nss']
     }
     default: {
       $service_restart    = '/etc/init.d/postfix reload'
@@ -88,6 +90,8 @@ class postfix::params {
       $smtpd_tls_CAfile   = undef
 
       $tls_random_source  = 'dev:/dev/urandom'
+
+      $additional_packages = []
     }
   }
 }
