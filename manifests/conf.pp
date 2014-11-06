@@ -11,6 +11,16 @@ define postfix::conf (
     lens    => 'Postfix_Main.lns',
     require => File[$::postfix::main_cf],
   }
+  
+  if is_array($value) {
+    if ! empty($value) {
+      $real_value = join($value, ', ')
+    } else {
+      $real_value = '' # leaves value as blank in config
+    }
+  } else {
+    $real_value = $value
+  }
 
   case $ensure {
     'absent': {
@@ -24,7 +34,7 @@ define postfix::conf (
       }
     }
     default: {
-      case $value {
+      case $real_value {
         undef: {
           augeas { "postfix/main.cf: '${name}' removed":
             changes => "rm ${name}",
@@ -46,8 +56,8 @@ define postfix::conf (
           }
         }
         default: {
-          augeas { "postfix/main.cf: '${name}' = '${value}'":
-            changes => "set ${name} '${value}'",
+          augeas { "postfix/main.cf: '${name}' = '${real_value}'":
+            changes => "set ${name} '${real_value}'",
           }
         }
       }
