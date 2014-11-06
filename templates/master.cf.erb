@@ -53,18 +53,24 @@ proxymap  unix  -       -       n       -       -       proxymap
 proxywrite unix -       -       n       -       1       proxymap
 smtp      unix  -       -       -       -       -       smtp
 <% if @smtp_outbound_ipv4 -%>
-  -o smtp_bind_address=<%= @smtp_outbound_ipv4 %><% end %>
+  -o smtp_bind_address=<%= @smtp_outbound_ipv4 %>
+<% end -%>
 <% if @smtp_outbound_ipv6 -%>
-  -o smtp_bind_address6=<%= @smtp_outbound_ipv6 %><% end %>
+  -o smtp_bind_address6=<%= @smtp_outbound_ipv6 %>
+<% end -%>
 <% if @smtp_outbound_helo -%>
-  -o smtp_helo_name=<%= @smtp_outbound_helo %><% end %>
+  -o smtp_helo_name=<%= @smtp_outbound_helo %>
+<% end -%>
 relay     unix  -       -       -       -       -       smtp
 <% if @smtp_outbound_ipv4 -%>
-  -o smtp_bind_address=<%= @smtp_outbound_ipv4 %><% end %>
+  -o smtp_bind_address=<%= @smtp_outbound_ipv4 %>
+<% end -%>
 <% if @smtp_outbound_ipv6 -%>
-  -o smtp_bind_address6=<%= @smtp_outbound_ipv6 %><% end %>
+  -o smtp_bind_address6=<%= @smtp_outbound_ipv6 %>
+<% end -%>
 <% if @smtp_outbound_helo -%>
-  -o smtp_helo_name=<%= @smtp_outbound_helo %><% end %>
+  -o smtp_helo_name=<%= @smtp_outbound_helo %>
+<% end -%>
 #  -o smtp_helo_timeout=5 -o smtp_connect_timeout=5
 showq     unix  n       -       -       -       -       showq
 error     unix  -       -       -       -       -       error
