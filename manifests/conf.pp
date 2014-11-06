@@ -35,6 +35,16 @@ define postfix::conf (
             changes => "clear ${name}",
           }
         }
+        true: {
+          augeas { "postfix/main.cf: '${name}' = 'yes'":
+            changes => "set ${name} 'yes'",
+          }
+        }
+        false: {
+          augeas { "postfix/main.cf: '${name}' = 'no'":
+            changes => "set ${name} 'no'",
+          }
+        }
         default: {
           augeas { "postfix/main.cf: '${name}' = '${value}'":
             changes => "set ${name} '${value}'",
