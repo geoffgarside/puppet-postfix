@@ -11,7 +11,7 @@ class postfix::config {
 
   file { $main_cf:
     ensure  => $file_ensure,
-    owner   => '0',
+    owner   => 'root',
     group   => '0',
     mode    => '0644',
     replace => false,
