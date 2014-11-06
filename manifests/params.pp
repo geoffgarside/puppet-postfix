@@ -6,7 +6,28 @@ class postfix::params {
     default   => '/etc/postfix',
   }
 
-  $smtpd_banner = '$myhostname ESMTP $mail_name'
+  $main_cf_source                  = 'puppet:///modules/postfix/main.cf'
+  $soft_bounce                     = false
+  $myorigin                        = '$myhostname'
+  $myhostname                      = $::fqdn
+  $mydestination                   = ['$myorigin']
+  $inet_interfaces                 = 'all'
+  $inet_protocols                  = 'ipv4'
+  $proxy_interfaces                = undef
+  $mynetworks_style                = 'host'
+  $mynetworks                      = undef
+  $relay_domains                   = undef
+  $smtpd_banner                    = '$myhostname ESMTP $mail_name'
+  $disable_vrfy_command            = true
+  $smtpd_helo_required             = true
+  $smtpd_client_restrictions       = []
+  $smtpd_relay_restrictions        = []
+  $smtpd_helo_restrictions         = []
+  $smtpd_sender_restrictions       = []
+  $smtpd_recipient_restrictions    = []
+  $smtpd_error_sleep_time          = '1s'
+  $smtpd_soft_error_limit          = 10
+  $smtpd_hard_error_limit          = 20
 
   case $::osfamily {
     FreeBSD: {
