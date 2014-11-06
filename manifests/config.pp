@@ -7,8 +7,7 @@ class postfix::config {
 
   $main_cf        = $::postfix::main_cf
   $master_cf      = $::postfix::master_cf
-  $main_cf_source = pick($::postfix::main_cf_source,
-                    'puppet:///modules/postfix/main.cf')
+  $main_cf_source = $::postfix::main_cf_source
 
   file { $main_cf:
     ensure  => $file_ensure,
