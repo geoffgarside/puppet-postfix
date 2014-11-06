@@ -30,9 +30,4 @@ class postfix::service {
     hasstatus  => true,
     hasrestart => true,
   }
-
-  exec { 'postfix::reload':
-    command     => $::postfix::params::service_reload,
-    refreshonly => true,
-  }
 }
