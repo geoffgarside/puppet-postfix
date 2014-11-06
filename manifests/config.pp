@@ -78,5 +78,5 @@ class postfix::config {
   postfix::conf { 'mynetworks':                           value => $mynetworks }->
   postfix::conf { 'relay_domains':                        value => $relay_domains }->
   postfix::conf { 'smtpd_banner':                         value => $::postfix::smtpd_banner }->
-  postfix::conf { 'unknown_local_recipient_reject_code':  value => '550' }->
+  postfix::conf { 'unknown_local_recipient_reject_code':  value => '550' }
 }
