@@ -29,13 +29,13 @@ class postfix (
   class { '::postfix::config': }->
   class { '::postfix::service': }->
   Class['postfix']
-  
+
   # Postfix reload exec
   exec { 'postfix::reload':
     command     => $::postfix::params::service_reload,
     refreshonly => true,
   }
-  
+
   # Changes in config class restart postfix
   Class['::postfix::config'] ~> Class['postfix::service']
 
