@@ -40,13 +40,15 @@ define postfix::hash (
     ]
   }
 
-  exec { $_postmap:
-    subscribe   => File[$_file],
-    refreshonly => true,
-    path        => [
-      '/sbin',            '/bin',
-      '/usr/sbin',        '/usr/bin',
-      '/usr/local/sbin',  '/usr/local/bin'
-    ],
+  if $ensure != 'absent' {
+    exec { $_postmap:
+      subscribe   => File[$_file],
+      refreshonly => true,
+      path        => [
+        '/sbin',            '/bin',
+        '/usr/sbin',        '/usr/bin',
+        '/usr/local/sbin',  '/usr/local/bin'
+      ],
+    }
   }
 }
